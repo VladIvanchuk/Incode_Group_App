@@ -3,14 +3,24 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Home";
 import Details from "../screens/Details";
 import { NavigationContainer } from "@react-navigation/native";
+import { IPerson } from "../types/person";
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  Details: { item: IPerson };
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Fans" component={Home} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>
